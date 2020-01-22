@@ -2,7 +2,8 @@
   "name": "indecision-app",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Andualem",
+  "repository": "https://github.com/AnduMekon/test-git-hub.git",
+  "author": "AnduMekon <anduabe@yahoo.com>",
   "license": "MIT",
   "dependencies": {
     "babel-preset-env": "1.5.2",
