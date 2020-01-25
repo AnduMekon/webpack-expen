@@ -1,57 +1,105 @@
-console.log('app.js is running');
+class IndecisionApp extends React.Component {
+  render() {
+    const title = 'የምግብ ማኖ';
+    const subtitle = 'የሚፈልጉትን አየነት ምግብ ይምረጡ!';
+    const options = ['የመጀመሪያ ምርጫ', 'ሁለትኛ ምርጫ', 'ሶስተኛ ምርጫ'];
 
-// JSX - JavaScript XML 
-
- const numbers = [55, 11, 200, 190];                           
-
-const app = {
-    title: 'Indecision Andualem',
-    subtitle: 'Put your life on the hands of a computer',
-    options: []
-};
-
-const onFormSubmit = (e) => {
-    e.preventDefault();
-    const option = e.target.elements.option.value;
-    if (option){
-    app.options.push(option);
-    e.target.elements.option.value='';
-    render();
-    }
-};
-const onRemoveAll = () => {
-    app.options =[];
-    render();
-};
-
-
-var appRoot = document.getElementById('app');
-
-const render = () => {
-    const template = (
-        <div>
-         <h1>{app.title}</h1>
-         {app.subtitle && <p>{app.subtitle}</p>}
-         <p>{app.options.length > 0 ? 'Here are your option123' : 'No option'}</p>
-         <p>{app.options.length}</p>
-         <button onClick={onRemoveAll}>Remove All</button>
-         { 
-         }
-            <ol>
-                <li>Item one</li>
-                <li>Item two</li>
-            </ol>
-            <form onSubmit={onFormSubmit}> 
-                <input type="text" name ="option"/>
-                <button>Add your comment</button>
-            </form>
+    return (
+      <div>
+        <Me />
+        <Header title={title} subtitle={subtitle} />
+        <Action />
+        <Options options={options} />
+        <AddOption />
+        <Me />
+        <MyForm />
         
-        </div>
-    )
-    ReactDOM.render(template, appRoot);
-};
-render();
+      </div>
+    );
+  }
+}
+class MyForm extends React.Component {
+  render() {
+    return (
+      <form>
+        <h1>Hello</h1>
+        <p>Enter your name:</p>
+        <input style={{backgroundColor: "lightblue"}}
+          type="text"
+        />
+      </form>
+    );
+  }
+}
+class Me extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1> this is me</h1>
+        <h1 style={{backgroundColor: "lightblue"}}>የምግብ ማኖ!</h1>
+      </div>
+    );
+  }
+}
+class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.subtitle}</h2>
+      </div>
+    );
+  }
+}
 
+class Action extends React.Component {
+handlePick() {
+  alert ('እውይ ተጫኖኝ');
+}
 
+  render() {
+    return (
+      <div>
+        <button onClick={this.handlePick}>የቱን መምረጥ ይፈልጋሉ? test</button>
+      </div>
+    );
+  }
+}
 
+class Options extends React.Component {
+  handleRemoveAll(){
+    alert('እርግጠኛ ኖዎት ማጥፋት ይፈልጋሉ? ')
+  }
+  render() {
+    return (
+      <div>
+      <button onClick={this.handleRemoveAll}>ለማጥፋት</button>
+        {
+          this.props.options.map((option) => <Option key={option} optionText={option} />)
+        }
+      </div>
+    );
+  }
+}
 
+class Option extends React.Component {
+  render() {
+    return (
+      <div>
+      *  {this.props.optionText}
+      </div>
+    );
+  }
+}
+
+class AddOption extends React.Component {
+  render() {
+    return (
+      <div>
+        AddOption component here
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
