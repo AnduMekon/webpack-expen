@@ -1,105 +1,41 @@
-class IndecisionApp extends React.Component {
-  render() {
-    const title = 'የምግብ ማኖ';
-    const subtitle = 'የሚፈልጉትን አየነት ምግብ ይምረጡ!';
-    const options = ['የመጀመሪያ ምርጫ', 'ሁለትኛ ምርጫ', 'ሶስተኛ ምርጫ'];
 
-    return (
-      <div>
-        <Me />
-        <Header title={title} subtitle={subtitle} />
-        <Action />
-        <Options options={options} />
-        <AddOption />
-        <Me />
-        <MyForm />
-        
-      </div>
-    );
-  }
+import React from 'react';
+import ReactDOM from 'react-dom';
+let count = 0; 
+const addOne = () => {
+    count++;
+    renderCounterApp();
+
+ 
 }
-class MyForm extends React.Component {
-  render() {
-    return (
-      <form>
-        <h1>Hello</h1>
-        <p>Enter your name:</p>
-        <input style={{backgroundColor: "lightblue"}}
-          type="text"
-        />
-      </form>
-    );
-  }
+const minusOne = () => {
+    count--;
+    renderCounterApp();
 }
-class Me extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1> this is me</h1>
-        <h1 style={{backgroundColor: "lightblue"}}>የምግብ ማኖ!</h1>
-      </div>
-    );
-  }
-}
-class Header extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subtitle}</h2>
-      </div>
-    );
-  }
+const reset = () => {
+    count = 0;
+ renderCounterApp();
 }
 
-class Action extends React.Component {
-handlePick() {
-  alert ('እውይ ተጫኖኝ');
-}
+var appRoot = document.getElementById('app');
 
-  render() {
-    return (
-      <div>
-        <button onClick={this.handlePick}>የቱን መምረጥ ይፈልጋሉ? test</button>
-      </div>
-    );
-  }
-}
+const renderCounterApp = () => {
+ var templateTwo = (
+     <div>
+     <h1>Count: {count}</h1>
+     <button onClick={addOne}> +1</button>
+     <button onClick={minusOne}> -1</button>
+     <button onClick={reset}> reset</button>
+ 
+     
+ 
+     </div>
+ 
+ );
+ReactDOM.render(templateTwo, appRoot)
+};
+renderCounterApp();
 
-class Options extends React.Component {
-  handleRemoveAll(){
-    alert('እርግጠኛ ኖዎት ማጥፋት ይፈልጋሉ? ')
-  }
-  render() {
-    return (
-      <div>
-      <button onClick={this.handleRemoveAll}>ለማጥፋት</button>
-        {
-          this.props.options.map((option) => <Option key={option} optionText={option} />)
-        }
-      </div>
-    );
-  }
-}
 
-class Option extends React.Component {
-  render() {
-    return (
-      <div>
-      *  {this.props.optionText}
-      </div>
-    );
-  }
-}
 
-class AddOption extends React.Component {
-  render() {
-    return (
-      <div>
-        AddOption component here
-      </div>
-    );
-  }
-}
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
