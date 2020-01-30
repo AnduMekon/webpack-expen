@@ -14,7 +14,7 @@ const Header = (props) => {
 };
 
 Header.defaultProps = {
-  title: 'Getting Things Done'
+  title: 'Getting Things Done!'
 };
 
 export default Header;
