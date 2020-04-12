@@ -1,11 +1,13 @@
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+
 module.exports = (env) => {
   const isProduction = env === 'production';
   const CSSExtract = new ExtractTextPlugin('styles.css');
+ 
   return {
-  entry: './src/app.js',
+  entry: ['babel-polyfill','./src/app.js'],
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
@@ -37,7 +39,9 @@ module.exports = (env) => {
     }]
   },
   plugins: [
-    CSSExtract
+    CSSExtract,
+  
+  
   ],
   devtool: isProduction ? 'source-map' : 'inline-source-map',
   devServer: {
